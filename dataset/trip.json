@@ -1,0 +1,52 @@
+{
+	"name": "trip",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "publictrip.txt",
+				"container": "out"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "trip_id",
+				"type": "String"
+			},
+			{
+				"name": "rideable_type",
+				"type": "String"
+			},
+			{
+				"name": "start_at",
+				"type": "String"
+			},
+			{
+				"name": "ended_at",
+				"type": "String"
+			},
+			{
+				"name": "start_station_id",
+				"type": "String"
+			},
+			{
+				"name": "end_station_id",
+				"type": "String"
+			},
+			{
+				"name": "rider_id",
+				"type": "String"
+			}
+		]
+	}
+}
