@@ -1,0 +1,17 @@
+{
+	"name": "dim_account",
+	"properties": {
+		"content": {
+			"query": "USE DWH_task2;\n-- No Data to work with this dimention \nCREATE EXTERNAL TABLE [dbo].[dim_account]\nWITH (\n    LOCATION = 'path-to-blob-storage/account-dimension/',\n    DATA_SOURCE = [my_blob_storage],  \n    FILE_FORMAT = [my_file_format]\n) AS\nSELECT \n    account_number AS account_id,   -- Primary Key\n    member,                         -- Membership status (True/False)\n    start_date,                     -- Membership start date\n    end_date                        -- Membership end date\nFROM staging_account;\n",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "DWH_task2",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
