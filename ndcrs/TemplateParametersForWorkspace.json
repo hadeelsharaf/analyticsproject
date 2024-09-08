@@ -1,0 +1,36 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"workspaceName": {
+			"value": "ndcrs"
+		},
+		"AzureBlobStorage1_connectionString": {
+			"value": ""
+		},
+		"AzureBlobStorage2_connectionString": {
+			"value": ""
+		},
+		"AzurePostgreSql1_connectionString": {
+			"value": ""
+		},
+		"ndcrs-WorkspaceDefaultSqlServer_connectionString": {
+			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=tcp:ndcrs.sql.azuresynapse.net,1433;Initial Catalog=@{linkedService().DBName}"
+		},
+		"warehousetaskspace-WorkspaceDefaultSqlServer_connectionString": {
+			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=tcp:warehousetaskspace.sql.azuresynapse.net,1433;Initial Catalog=@{linkedService().DBName}"
+		},
+		"warehousingtask-WorkspaceDefaultSqlServer_connectionString": {
+			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=tcp:warehousingtask.sql.azuresynapse.net,1433;Initial Catalog=@{linkedService().DBName}"
+		},
+		"ndcrs-WorkspaceDefaultStorage_properties_typeProperties_url": {
+			"value": "https://synwarehousetask.dfs.core.windows.net"
+		},
+		"warehousetaskspace-WorkspaceDefaultStorage_properties_typeProperties_url": {
+			"value": "https://udaaccname.dfs.core.windows.net"
+		},
+		"warehousingtask-WorkspaceDefaultStorage_properties_typeProperties_url": {
+			"value": "https://accsynstorage.dfs.core.windows.net"
+		}
+	}
+}
