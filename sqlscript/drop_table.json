@@ -1,0 +1,17 @@
+{
+	"name": "drop_table",
+	"properties": {
+		"content": {
+			"query": "DROP EXTERNAL TABLE dbo.staging_payment ;",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "master",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
