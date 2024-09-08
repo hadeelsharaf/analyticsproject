@@ -1,0 +1,17 @@
+{
+	"name": "Dim_station",
+	"properties": {
+		"content": {
+			"query": "\nUSE DWH_task2;\n\nCREATE EXTERNAL TABLE [Dim_Station]\nWITH (\n    LOCATION = 'dim_station.csv' ,\n    DATA_SOURCE = [csvfiles_synwarehousetask_dfs_core_windows_net],\n    FILE_FORMAT = [SynapseDelimitedTextFormat]\n) AS\nSELECT\n    station_id AS station_key,  -- Surrogate key\n    name AS station_name,\n    latitude,\n    longitude\nFROM dbo.staging_station;\n",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "DWH_task2",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

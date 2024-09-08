@@ -2,12 +2,12 @@
 	"name": "dim_date",
 	"properties": {
 		"content": {
-			"query": "IF NOT EXISTS (SELECT * FROM sys.external_data_sources WHERE name = 'csvfiles_synwarehousetask_dfs_core_windows_net') \n\tCREATE EXTERNAL DATA SOURCE [csvfiles_synwarehousetask_dfs_core_windows_net] \n\tWITH (\n\t\tLOCATION = 'abfss://csvfiles@synwarehousetask.dfs.core.windows.net' \n\t)\nGO\n\nIF NOT EXISTS (SELECT * FROM sys.external_file_formats WHERE name = 'SynapseDelimitedTextFormat') \n\tCREATE EXTERNAL FILE FORMAT [SynapseDelimitedTextFormat] \n\tWITH ( FORMAT_TYPE = DELIMITEDTEXT ,\n\t       FORMAT_OPTIONS (\n\t\t\t FIELD_TERMINATOR = ',',\n\t\t\t USE_TYPE_DEFAULT = FALSE\n\t\t\t))\nGO\n\nCREATE EXTERNAL TABLE [Dim_Rider]\nWITH (\n    LOCATION = 'abfss://csvfiles@synwarehousetask.dfs.core.windows.net',\n    DATA_SOURCE = [csvfiles_synwarehousetask_dfs_core_windows_net],\n    FILE_FORMAT = [SynapseDelimitedTextFormat]\n) AS\nSELECT\n    rider_id AS rider_key,   -- Surrogate key\n    first AS first_name,\n    last AS last_name,\n    address,\n    birthday\nFROM staging_rider;\n\n",
+			"query": "USE DWH_task2;\n\nCREATE EXTERNAL TABLE [Dim_Rider]\nWITH (\n    LOCATION = 'dim_date.csv',\n    DATA_SOURCE = [csvfiles_synwarehousetask_dfs_core_windows_net],\n    FILE_FORMAT = [SynapseDelimitedTextFormat]\n) AS\nSELECT\n    rider_id AS rider_key,   -- Surrogate key\n    first AS first_name,\n    last AS last_name,\n    address,\n    birthday\nFROM staging_rider;\n\n",
 			"metadata": {
 				"language": "sql"
 			},
 			"currentConnection": {
-				"databaseName": "master",
+				"databaseName": "DWH_task2",
 				"poolName": "Built-in"
 			},
 			"resultLimit": 5000
