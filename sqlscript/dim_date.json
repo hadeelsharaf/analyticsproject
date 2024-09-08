@@ -2,12 +2,12 @@
 	"name": "dim_date",
 	"properties": {
 		"content": {
-			"query": "USE DWH_task2;\n\nCREATE EXTERNAL TABLE [Dim_Rider]\nWITH (\n    LOCATION = 'dim_date.csv',\n    DATA_SOURCE = [csvfiles_synwarehousetask_dfs_core_windows_net],\n    FILE_FORMAT = [SynapseDelimitedTextFormat]\n) AS\nSELECT\n    rider_id AS rider_key,   -- Surrogate key\n    first AS first_name,\n    last AS last_name,\n    address,\n    birthday\nFROM staging_rider;\n\n",
+			"query": "USE DWH_task2;\nCREATE EXTERNAL TABLE [Dim_Date]\nWITH (\n    LOCATION = 'dim_date.csv',\n    DATA_SOURCE = [csvfiles_synwarehousetask_dfs_core_windows_net],\n    FILE_FORMAT = [SynapseDelimitedTextFormat]\n) AS\nWITH DateSequence AS (\n    SELECT CAST('2016-01-01' AS DATE) AS full_date\n    UNION ALL\n    SELECT DATEADD(DAY, 1, full_date)\n    FROM DateSequence\n    WHERE full_date < '2023-12-31'\n)\nSELECT\n    CAST(CONVERT(VARCHAR, full_date, 112) AS INT) AS date_key, \n    full_date,\n    DATENAME(WEEKDAY, full_date) AS day_of_week,\n    DAY(full_date) AS day_of_month,\n    DATEPART(DAYOFYEAR, full_date) AS day_of_year,\n    DATEPART(WEEK, full_date) AS week_of_year,\n    DATENAME(MONTH, full_date) AS month_name,\n    MONTH(full_date) AS month_number,\n    DATEPART(QUARTER, full_date) AS quarter,\n    YEAR(full_date) AS year,\n    CASE \n        WHEN DATENAME(WEEKDAY, full_date) IN ('Saturday', 'Sunday') THEN 1 \n        ELSE 0 \n    END AS is_weekend\nFROM DateSequence;\n",
 			"metadata": {
 				"language": "sql"
 			},
 			"currentConnection": {
-				"databaseName": "DWH_task2",
+				"databaseName": "master",
 				"poolName": "Built-in"
 			},
 			"resultLimit": 5000

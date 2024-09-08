@@ -1,0 +1,17 @@
+{
+	"name": "dim_rider",
+	"properties": {
+		"content": {
+			"query": "\nUSE DWH_task2;\n\nCREATE EXTERNAL TABLE [Dim_Rider]\nWITH (\n    LOCATION = 'dim_rider.csv',\n    DATA_SOURCE = [csvfiles_synwarehousetask_dfs_core_windows_net],\n    FILE_FORMAT = [SynapseDelimitedTextFormat]\n) AS\nSELECT\n    rider_id AS rider_key,   -- Surrogate key\n    first AS first_name,\n    last AS last_name,\n    address,\n    birthday\nFROM staging_rider;\n",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "DWH_task2",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
